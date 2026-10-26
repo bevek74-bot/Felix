@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Felix ✨ Your Sweet Companion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Quicksand', sans-serif; }
+    .blinking-eyes { animation: blink 4s infinite; transform-origin: center; }
+    @keyframes blink { 0%,95%,100%{transform:scaleY(1)} 97%{transform:scaleY(0.1)} }
+    .twitch-l { animation: twL 5s infinite; transform-origin: 105px 120px; }
+    .twitch-r { animation: twR 5s infinite 0.5s; transform-origin: 195px 120px; }
+    @keyframes twL { 0%,90%,100%{transform:rotate(0)} 93%{transform:rotate(-8deg)} 96%{transform:rotate(2deg)} }
+    @keyframes twR { 0%,90%,100%{transform:rotate(0)} 93%{transform:rotate(8deg)} 96%{transform:rotate(-2deg)} }
+    .sway-char { animation: sway 4s ease-in-out infinite; }
+    @keyframes sway { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-6px) rotate(1.5deg)} }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-purple-100 to-indigo-100 min-h-screen text-slate-800 flex flex-col p-3 sm:p-6">
+  
+  <!-- Header -->
+  <header class="max-w-4xl w-full mx-auto bg-white/70 backdrop-blur-md rounded-2xl p-3 px-5 mb-4 shadow-sm border border-white flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-pink-400 flex items-center justify-center text-xl shadow">🎀</div>
+      <div>
+        <h1 class="font-bold text-pink-600 text-lg leading-tight">Felix</h1>
+        <p class="text-xs text-slate-500 font-medium">he/they 🌸 • online & ready to chat!</p>
+      </div>
+    </div>
+    <span id="mood-pill" class="text-xs font-bold px-3 py-1 rounded-full bg-pink-100 text-pink-600 border border-pink-200">✨ Bubbly</span>
+  </header>
+
+  <!-- Main Grid -->
+  <main class="max-w-4xl w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 flex-1">
+    
+    <!-- Left: Avatar -->
+    <div class="md:col-span-5 bg-white/70 backdrop-blur-md rounded-3xl p-4 shadow-md border border-white flex flex-col items-center justify-between">
+      <div class="w-full flex justify-between items-center">
+        <span class="text-xs uppercase font-bold text-pink-500 tracking-wider">Companion</span>
+        <button onclick="poke()" class="text-xs bg-pink-100 hover:bg-pink-200 text-pink-700 px-3 py-1 rounded-full font-bold active:scale-95 transition">👉 Poke!</button>
+      </div>
+
+      <!-- SVG Avatar -->
+      <div class="w-56 h-56 my-2 sway-char relative">
+        <svg id="felix-svg" viewBox="0 0 300 300" class="w-full h-full drop-shadow-md">
+          <defs>
+            <linearGradient id="hairG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fbcfe8"/><stop offset="100%" stop-color="#f472b6"/>
+            </linearGradient>
+            <linearGradient id="sweaterG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Ears -->
+          <polygon class="twitch-l" points="80,120 100,50 135,100" fill="url(#hairG)"/>
+          <polygon class="twitch-l" points="87,115 102,65 125,102" fill="#fda4af"/>
+          <polygon class="twitch-r" points="220,120 200,50 165,100" fill="url(#hairG)"/>
+          <polygon class="twitch-r" points="213,115 198,65 175,102" fill="#fda4af"/>
+
+          <!-- Body / Sweater -->
+          <path d="M75,270 C85,225 110,215 150,215 C190,215 215,225 225,270 C230,290 210,300 150,300 C90,300 70,290 75,270 Z" fill="url(#sweaterG)"/>
+          <path d="M115,205 C115,195 130,190 150,190 C170,190 185,195 185,205 C185,220 170,225 150,225 C130,225 115,220 115,205 Z" fill="#f3e8ff" stroke="#c084fc" stroke-width="2"/>
+          <circle cx="150" cy="193" r="4.5" fill="#facc15"/>
+
+          <!-- Head -->
+          <path d="M95,130 C95,95 120,80 150,80 C180,80 205,95 205,130 C205,170 175,192 150,192 C125,192 95,170 95,130 Z" fill="#ffe4e6"/>
+
+          <!-- Bangs -->
+          <path d="M95,120 C90,100 110,80 150,75 C190,80 210,100 205,120 C200,105 185,98 175,108 C165,118 160,98 150,102 C140,98 135,118 125,108 C115,98 100,105 95,120 Z" fill="url(#hairG)"/>
+
+          <!-- Eyes -->
+          <g class="blinking-eyes">
+            <ellipse cx="125" cy="140" rx="13" ry="16" fill="#fff"/>
+            <ellipse id="pupil-l" cx="126" cy="141" rx="9" ry="13" fill="#ec4899"/>
+            <circle cx="122" cy="136" r="4" fill="#fff"/>
+            <ellipse cx="175" cy="140" rx="13" ry="16" fill="#fff"/>
+            <ellipse id="pupil-r" cx="174" cy="141" rx="9" ry="13" fill="#ec4899"/>
+            <circle cx="172" cy="136" r="4" fill="#fff"/>
+          </g>
+
+          <!-- Blush -->
+          <g id="blush-g">
+            <ellipse cx="112" cy="155" rx="10" ry="5" fill="#f43f8e" opacity="0.4"/>
+            <ellipse cx="188" cy="155" rx="10" ry="5" fill="#f43f8e" opacity="0.4"/>
+          </g>
+
+          <!-- Mouth -->
+          <path id="mouth" d="M141,162 Q146,168 150,163 Q154,168 159,162" stroke="#be185d" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="w-full grid grid-cols-3 gap-2 mt-2">
+        <button onclick="quickAction('pat')" class="py-1.5 px-2 bg-pink-50 hover:bg-pink-100 rounded-xl text-xs font-bold text-pink-700 border border-pink-200">👋 Headpat</button>
+        <button onclick="quickAction('treat')" class="py-1.5 px-2 bg-purple-50 hover:bg-purple-100 rounded-xl text-xs font-bold text-purple-700 border border-purple-200">🍓 Strawberry</button>
+        <button onclick="quickAction('hug')" class="py-1.5 px-2 bg-indigo-50 hover:bg-indigo-100 rounded-xl text-xs font-bold text-indigo-700 border border-indigo-200">🫂 Hug</button>
+      </div>
+    </div>
+
+    <!-- Right: Chat Box -->
+    <div class="md:col-span-7 bg-white/70 backdrop-blur-md rounded-3xl p-4 shadow-md border border-white flex flex-col h-[480px]">
+      
+      <!-- Messages Container -->
+      <div id="chat-box" class="flex-1 overflow-y-auto space-y-3 pr-1">
+        <div class="flex items-start gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-pink-400 text-white flex items-center justify-center text-sm">🌸</div>
+          <div class="bg-white rounded-2xl rounded-tl-none p-3 shadow-sm text-sm max-w-[85%] border border-pink-100">
+            <span class="text-xs font-bold text-pink-600 block mb-0.5">Felix</span>
+            *bounces happily, sweater paws waving* H-hii! I was waiting for someone sweet like you today! What do you want to talk about? (⁄ ⁄•⁄ω⁄•⁄ ⁄)✨
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div id="typing" class="hidden text-xs text-pink-500 font-semibold py-1.5 italic">Felix is replying...</div>
+
+      <!-- Input Form -->
+      <form id="chat-form" class="mt-2 flex gap-2">
+        <input id="user-input" type="text" placeholder="Talk to Felix..." class="flex-1 px-4 py-2.5 bg-white/90 rounded-2xl text-sm border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-300" autocomplete="off" />
+        <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-4 py-2.5 rounded-2xl text-sm shadow transition active:scale-95">Send</button>
+      </form>
+    </div>
+
+  </main>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+    const chatForm = document.getElementById('chat-form');
+    const userInput = document.getElementById('user-input');
+    const typing = document.getElementById('typing');
+    const moodPill = document.getElementById('mood-pill');
+    const mouth = document.getElementById('mouth');
+
+    const replies = [
+      "*giggles cutely and hides behind my oversized sleeves* You're so sweet to me! (⁄ ⁄•⁄ω⁄•⁄ ⁄)✨",
+      "*cat ears perk up happily* That sounds so fun! Tell me more about it! 🌸",
+      "*leans in with soft purrs* I'm right here beside you, listening to everything! (*^▽^*) 💖",
+      "*fidgets shyly and blushes* Hehe, you always know how to make my heart flutter~ 🍓"
+    ];
+
+    function setMood(text, mood) {
+      moodPill.textContent = text;
+      if (mood === 'flustered') {
+        mouth.setAttribute('d', 'M143,165 Q147,159 150,165 Q153,159 157,165');
+      } else if (mood === 'smile') {
+        mouth.setAttribute('d', 'M140,160 Q150,174 160,160 Z');
+      } else {
+        mouth.setAttribute('d', 'M141,162 Q146,168 150,163 Q154,168 159,162');
+      }
+    }
+
+    function addMessage(sender, text, isUser) {
+      const msg = document.createElement('div');
+      msg.className = isUser ? 'flex justify-end gap-2.5' : 'flex items-start gap-2.5';
+      msg.innerHTML = `
+        ${!isUser ? '<div class="w-8 h-8 rounded-full bg-pink-400 text-white flex items-center justify-center text-sm">🌸</div>' : ''}
+        <div class="${isUser ? 'bg-pink-500 text-white rounded-tr-none' : 'bg-white text-slate-800 rounded-tl-none border border-pink-100'} rounded-2xl p-3 shadow-sm text-sm max-w-[85%]">
+          <span class="text-xs font-bold ${isUser ? 'text-pink-100' : 'text-pink-600'} block mb-0.5">${sender}</span>
+          ${text}
+        </div>
+      `;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function respond(text) {
+      typing.classList.remove('hidden');
+      setTimeout(() => {
+        typing.classList.add('hidden');
+        let rep = replies[Math.floor(Math.random() * replies.length)];
+        const lower = text.toLowerCase();
+        if (lower.includes('strawberry')) {
+          rep = "*sips sweet strawberry milk happily* Yum! Thank you for the treat! (*^▽^*) 🍓";
+          setMood('🍓 Happy', 'smile');
+        } else if (lower.includes('hug')) {
+          rep = "*snuggles tight into your arms* So warm and cozy... I love your hugs! 🫂☁️";
+          setMood('☁️ Cozy', 'flustered');
+        } else if (lower.includes('pat')) {
+          rep = "*leans into your hand with soft purrs* Mmm, headpats are my favorite... :3 🌸";
+          setMood('🌸 Purring', 'flustered');
+        } else {
+          setMood('✨ Bubbly', 'default');
+        }
+        addMessage('Felix', rep, false);
+      }, 700);
+    }
+
+    function poke() {
+      setMood('😳 Eep!', 'flustered');
+      addMessage('Felix', "*jumps and giggles, blushing deeply* Eep! That tickles! Don't tease me like that! (⁄ ⁄•⁄ω⁄•⁄ ⁄)", false);
+      setTimeout(() => setMood('✨ Bubbly', 'default'), 3500);
+    }
+
+    function quickAction(type) {
+      if (type === 'pat') {
+        addMessage('You', '*gently pats Felix on the head*', true);
+        respond('pat');
+      } else if (type === 'treat') {
+        addMessage('You', '*gives Felix a bottle of strawberry milk* 🍓', true);
+        respond('strawberry');
+      } else if (type === 'hug') {
+        addMessage('You', '*gives Felix a warm tight hug* 🫂', true);
+        respond('hug');
+      }
+    }
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = userInput.value.trim();
+      if (!val) return;
+      userInput.value = '';
+      addMessage('You', val, true);
+      respond(val);
+    });
+  </script
+  
